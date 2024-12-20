@@ -1,0 +1,15 @@
+.DS_Store
+*.orig
+.vscode/
+
+# Node.js
+node_modules/
+
+# Logs
+*.log
+
+# Build
+dist/
+
+# Environment Variables
+.env
