@@ -27,7 +27,7 @@ mongoose.connect(mongoUri)
   .catch(err => console.error('MongoDB connection error:', err));
 
 if (process.env.NODE_ENV !== 'development') {
-  const clientBuildPath = path.join(__dirname, "../client", "build");
+  const clientBuildPath = path.join(__dirname, "../client/dist/", "build");
   app.use(express.static(clientBuildPath));
   
   app.get("*", (req, res) => {
