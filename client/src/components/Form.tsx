@@ -11,6 +11,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Progress } from "./ui/progress";
 import Loader from "./Loader";
 import { getUser, registerUser, updateUser } from "@/services/user";
 import { getFormFieldsFromStorage, initializeFormFields } from "@/utils/form-utils";
@@ -29,9 +30,25 @@ interface FormData {
   [key: string]: string | number;
 };
 
+interface Field {
+  name: string;
+  label: string;
+  type: string;
+  step: number;
+  required?: boolean;
+  placeholder?: string;
+}
+
+interface User {
+  _id: string;
+  email: string;
+  password: string;
+  lastStepSubmitted: number;
+}
+
 const Form: React.FC = () => {
   
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<User | null>(null);
   const [formData, setFormData] = useState<FormData>({
     email: "",
     password: "",
@@ -50,7 +67,7 @@ const Form: React.FC = () => {
   const navigate = useNavigate();
 
 
-  const [fields, setFields] = useState([]);
+  const [fields, setFields] = useState<Field[]>([]);
 
   useEffect(() => {
     const storedFields = getFormFieldsFromStorage();
@@ -73,9 +90,8 @@ const Form: React.FC = () => {
   const validate = (): boolean => {
     const newErrors: Partial<FormData> = {};
 
-    for (const field of steps[currentStep]){
-      console.log(field);
-      if (!formData[field]?.toString().trim()) newErrors[field] = `${field} is required`;
+    for (const field of fields.filter((field) => (field.step === currentStep && field.required))){
+      if (!formData[field.name]?.toString().trim()) newErrors[field.name] = `${field.name} is required`;
     }
 
     setErrors(newErrors);
@@ -86,15 +102,14 @@ const Form: React.FC = () => {
 
     e.preventDefault();
 
-    if (isFieldValidationOn && !validate()) return
+    if (isFieldValidationOn && !validate()) {
+      return;
+    }
 
     setIsLoading(true);
 
     try {
-      // 1. Try to "authenticate" user or create a new one
-      // 2. Set the current step whether it's a new user (step 2) or existing user (step X, pulled from database)
-      // 3. Handle subsequent steps as user progresses trough them
-
+      
       console.log(`Current step: ${currentStep}`);
       if (currentStep === 1) {
         const existingUser = await getUser(formData.email, formData.password);
@@ -147,8 +162,9 @@ const Form: React.FC = () => {
       <CardHeader>
         <CardTitle className="text-2xl">Step {currentStep}/{totalSteps}</CardTitle>
         <CardDescription>
-          Click on Next/Finish when done
+          Progress
         </CardDescription>
+        <Progress value={((currentStep - 1) / totalSteps) * 100} />
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="w-full">

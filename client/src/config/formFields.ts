@@ -5,6 +5,7 @@ export interface FormField {
   placeholder?: string;
   step?: number;
   alwaysDisplayed?: boolean;
+  required?: boolean;
 }
 
 const defaultFormFields: FormField[] = [
@@ -15,6 +16,7 @@ const defaultFormFields: FormField[] = [
     placeholder: "Email",
     step: 1,
     alwaysDisplayed: true,
+    required: true,
   },
   {
     name: "password",
@@ -23,6 +25,7 @@ const defaultFormFields: FormField[] = [
     placeholder: "Password",
     step: 1,
     alwaysDisplayed: true,
+    required: true,
   },
   {
     name: "aboutMe",

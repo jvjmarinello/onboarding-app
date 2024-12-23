@@ -1,4 +1,4 @@
-import AdminConfiguration from "@/components/AdminConfiguration";
+import SetupForm from "@/components/SetupForm";
 
 const Admin = () => {
   return (
@@ -9,7 +9,7 @@ const Admin = () => {
       <div className="text-sm text-gray-500 mb-10">
         Use the form below to manage how data fields appear on each step of the onboarding process
       </div>
-      <AdminConfiguration />
+      <SetupForm />
     </div>
   );
 };

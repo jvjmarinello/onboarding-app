@@ -6,10 +6,18 @@ interface DropdownProps {
   onSelection: (name: string, value: string | number) => void; 
 }
 
+interface Field {
+  name: string;
+  value: string;
+  label: string;
+  step: number;
+  alwaysDisplayed: boolean;
+}
+
 const Dropdown: React.FC<DropdownProps> = ({ field, onSelection }) => {
   const [selected, setSelected] = useState<string | number>(field.step);
 
-  const options = [
+  const options: { value: string | number; label: string }[] = [
     { value: '', label: 'Disabled' },
     // { value: 1, label: 'Step 1' },
     { value: 2, label: 'Step 2' },
@@ -43,12 +51,12 @@ const Dropdown: React.FC<DropdownProps> = ({ field, onSelection }) => {
   );
 };
 
-const AdminConfiguration = () => {
+const SetupForm = () => {
 
-  const [fields, setFields] = useState([]);
+  const [fields, setFields] = useState<Field[]>([]);
 
   useEffect(() => {
-    const storedFields = getFormFieldsFromStorage();
+    const storedFields: Field[] | null = getFormFieldsFromStorage();
     if (!storedFields || storedFields.length === 0) {
       initializeFormFields();
     } else {
@@ -57,7 +65,7 @@ const AdminConfiguration = () => {
     }
   }, []);
 
-  const handleSelection = (name, newStep) => {
+  const handleSelection = (name: string, newStep: string | number) => {
     setFields((prevFields) => {
       const updatedFields = prevFields.map((field) =>
         field.name === name ? { ...field, step: newStep } : field
@@ -92,4 +100,4 @@ const AdminConfiguration = () => {
   )
 };
 
-export default AdminConfiguration;
+export default SetupForm;
