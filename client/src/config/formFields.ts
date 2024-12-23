@@ -46,23 +46,27 @@ const defaultFormFields: FormField[] = [
     label: "City",
     type: "text",
     placeholder: "New York",
+    step: 3,
   },
   {
     name: "state",
     label: "State",
     type: "text",
     placeholder: "NY",
+    step: 3,
   },
   {
     name: "zip",
     label: "Zip",
     type: "number",
     placeholder: "10003",
+    step: 3,
   },
   {
     name: "birthdate",
     label: "Birth Date",
     type: "date",
+    step: 2,
   },
 ];
 
