@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors';
+import path from "path";
 import userRoutes from './routes/userRoutes';
 
 dotenv.config();
@@ -25,6 +26,17 @@ mongoose.connect(mongoUri)
   .then(() => console.log('Connected to MongoDB'))
   .catch(err => console.error('MongoDB connection error:', err));
 
+if (process.env.NODE_ENV !== 'development') {
+  const clientBuildPath = path.join(__dirname, "../client", "build");
+  app.use(express.static(clientBuildPath));
+  
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(clientBuildPath, "index.html"));
+  });
+  console.log("Static files served in production/stage environment");
+} else {
+  console.log("Static file serving skipped (not in production/stage)");
+}
 
 // Routes
 app.use('/api/users', userRoutes);
