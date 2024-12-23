@@ -1,18 +1,7 @@
 import { useEffect, useState } from "react";
-import { getFormFieldsFromStorage, initializeFormFields } from "@/utils/form-utils";
+import { getFormFieldsFromStorage, initializeFormFields } from "@/utils/formUtils";
+import { FormField, DropdownProps,  } from "@/types/common";
 
-interface DropdownProps {
-  field: { name: string, value: string, step: number, alwaysDisplayed: boolean}
-  onSelection: (name: string, value: string | number) => void; 
-}
-
-interface Field {
-  name: string;
-  value: string;
-  label: string;
-  step: number;
-  alwaysDisplayed: boolean;
-}
 
 const Dropdown: React.FC<DropdownProps> = ({ field, onSelection }) => {
   const [selected, setSelected] = useState<string | number>(field.step);
@@ -53,10 +42,10 @@ const Dropdown: React.FC<DropdownProps> = ({ field, onSelection }) => {
 
 const SetupForm = () => {
 
-  const [fields, setFields] = useState<Field[]>([]);
+  const [fields, setFields] = useState<FormField[]>([]);
 
   useEffect(() => {
-    const storedFields: Field[] | null = getFormFieldsFromStorage();
+    const storedFields: FormField[] | null = getFormFieldsFromStorage();
     if (!storedFields || storedFields.length === 0) {
       initializeFormFields();
     } else {

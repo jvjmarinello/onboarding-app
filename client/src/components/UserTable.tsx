@@ -40,7 +40,7 @@ const UserTable = () => {
   return (
     users &&
     <Table>
-      <TableCaption>List of registered users and their information.</TableCaption>
+      {/* <TableCaption>List of registered users and their information.</TableCaption> */}
       <TableHeader>
         <TableRow>
           <TableHead>Email</TableHead>

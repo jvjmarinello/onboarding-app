@@ -14,37 +14,10 @@ import {
 import { Progress } from "./ui/progress";
 import Loader from "./Loader";
 import { getUser, registerUser, updateUser } from "@/services/user";
-import { getFormFieldsFromStorage, initializeFormFields } from "@/utils/form-utils";
+import { getFormFieldsFromStorage, initializeFormFields } from "@/utils/formUtils";
 import { isFieldValidationOn, totalSteps } from "@/config/parameters";
+import { FormField, FormData, User } from "@/types/common";
 
-interface FormData {
-  email: string;
-  password: string;
-  aboutMe: string;
-  birthdate: string;
-  street: string;
-  city: string;
-  state: string;
-  zip: string;
-  lastStepSubmitted: number;
-  [key: string]: string | number;
-};
-
-interface Field {
-  name: string;
-  label: string;
-  type: string;
-  step: number;
-  required?: boolean;
-  placeholder?: string;
-}
-
-interface User {
-  _id: string;
-  email: string;
-  password: string;
-  lastStepSubmitted: number;
-}
 
 const Form: React.FC = () => {
   
@@ -67,7 +40,7 @@ const Form: React.FC = () => {
   const navigate = useNavigate();
 
 
-  const [fields, setFields] = useState<Field[]>([]);
+  const [fields, setFields] = useState<FormField[]>([]);
 
   useEffect(() => {
     const storedFields = getFormFieldsFromStorage();

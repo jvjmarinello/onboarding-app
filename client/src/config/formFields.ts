@@ -1,12 +1,4 @@
-export interface FormField {
-  name: string;
-  label: string;
-  type?: string;
-  placeholder?: string;
-  step?: number;
-  alwaysDisplayed?: boolean;
-  required?: boolean;
-}
+import { FormField } from "@/types/common";
 
 const defaultFormFields: FormField[] = [
   {
