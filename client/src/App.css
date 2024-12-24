@@ -3,26 +3,3 @@
   margin: 0 auto;
   --header-height: 70px;
 }
-
-.page-container {
-  padding: 100px;
-  display: flex;
-  flex-direction: column;
-  justify-content: top;
-  align-items: top;
-  min-height: 100vh;
-  overflow: scroll;
-}
-
-@media (min-width: 768px) {
-  .page-container {
-    min-width: 768px;
-  }
-}
-
-@media (max-width: 768px) {
-  .page-container {
-    padding: 100px 1rem 0;
-    width: 100vw;
-  }
-}

@@ -27,6 +27,12 @@ const defaultFormFields: FormField[] = [
     step: 2,
   },
   {
+    name: "birthdate",
+    label: "Birth Date",
+    type: "date",
+    step: 2,
+  },
+  {
     name: "street",
     label: "Street",
     type: "text",
@@ -53,12 +59,6 @@ const defaultFormFields: FormField[] = [
     type: "number",
     placeholder: "10003",
     step: 3,
-  },
-  {
-    name: "birthdate",
-    label: "Birth Date",
-    type: "date",
-    step: 2,
   },
 ];
 
