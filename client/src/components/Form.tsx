@@ -48,7 +48,7 @@ const Form: React.FC = () => {
       initializeFormFields();
     } else {
       setFields(storedFields);
-      console.log("Loaded form fields from local storage:", storedFields);
+      // console.log("Loaded form fields from local storage:", storedFields);
     }
     setIsLoading(false);
   }, []);
